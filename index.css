@@ -1,0 +1,41 @@
+body{
+    background-image: url('Resources/olav-ahrens-rotne-MAEbdaFe4ps-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+::placeholder { 
+    color: rgb(228, 224, 224);
+    opacity: 1; 
+}
+input{
+    position:relative; 
+    left:350px; 
+    top:10px;
+}
+a {
+    position:relative; 
+    left:240px; 
+    top:10px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+select{
+    position:relative; 
+    left:150px; 
+    top:100px;
+}
+
+a:hover {
+    background-color: #ddd;
+    color: black;
+}
+.next {
+    background-color: #af784c;
+    color: white;
+} 
+.round {
+    border-radius: 50%;
+}
