@@ -6,10 +6,10 @@ h1{
 }
 .container-fluid{
     position: absolute;
-    top: 80px;
+    top: 0px;
     height: 1000px;
     /* opacity: 0.4; */
-    /* background-image: url('Resources/olav-ahrens-rotne-MAEbdaFe4ps-unsplash.jpg'); */
+    background-image: url('Resources/olav-ahrens-rotne-MAEbdaFe4ps-unsplash.jpg');
     /* background-color: rgba(0, 0, 0, 0.7); */
     
     /* background-blend-mode: darken; */
@@ -58,4 +58,7 @@ select{
 #name{
     margin-left: 300px;
     margin-top: 100px;
+}
+#submit{
+    display: none;
 }

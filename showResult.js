@@ -45,6 +45,53 @@ const compQuestions = [
         correctAnswer: 'c'
     }
 ];
+const geogQuestions = [
+    {
+        question: "Polavaram Project is located in which state?",
+        answers: {
+            a: "Madhya Pradesh",
+            b: "Andhra Pradesh",
+            c: "Karnataka",
+        },
+        correctAnswer: 'b'
+    },
+    {
+        question: "Which is the longest National Highway in India??",
+        answers: {
+            a: "NH-2",
+            b: "NH-10",
+            c: "NH-44",
+        },
+        correctAnswer: 'c'
+    },
+    {
+        question: "Which among the following states is largest producer of Coffee in India?",
+        answers: {
+            a: "Tamilnadu",
+            b: "Karnataka",
+            c: "Kerala",
+        },
+        correctAnswer: 'b'
+    },
+    {
+        question: "Duncan Passage separates ?",
+        answers: {
+            a: "Rutland Island and Little Andaman",
+            b: "Andaman and Nicobar",
+            c: "South andaman and little Andaman",
+        },
+        correctAnswer: 'a'
+    },
+    {
+        question: "Which among the following is not located in Andaman & Nicobar island? ",
+        answers: {
+            a: "Campbell Bay",
+            b: "Mahatma Gandhi Marine National Park",
+            c: "Guindy National Park"
+        },
+        correctAnswer: 'c'
+    }
+];
 
 let name = document.getElementById('name')
 let quiz = document.getElementById('quiz')
@@ -53,52 +100,64 @@ let result = document.getElementById('result')
 let category = document.getElementById('category')
 let quizDiv = document.getElementById('quizContentDiv')
 
-window.addEventListener('load', showQuiz)
-
-let showQuiz = () => {
-    // event.preventDefault()
-
-    quizDiv.innerHTML = ""
+let startQuiz = () =>{
 
     if(name.value == '')
         alert(`Don't hide your name :)`)
     else if (category.value == `Select Category`)
         alert(`Oops.. You have to select a category!`)
     else{
-
-        compQuestions.map((a) => {
-            var div = document.createElement('div')
-            div.className = `p-2 m-3 text-center bg-danger rounded-pill`
-            var p = document.createElement('p')
-            p.textContent = a.question
-            div.append(p)
-            for (key in a.answers) {
-                var label = document.createElement('label')
-                label.textContent = `${key}  :  ${a.answers[key]}   `
-                label.className = `pr-4`
-                var input = document.createElement('input')
-                input.type = "radio"
-                input.name = "quesion" + i
-                input.setAttribute("class", "ques" + i)
-                input.className = `pr-1`
-                input.value = a.correctAnswer
-                div.append(input, label)
-            }
-            quizDiv.append(div)
-            i++
-        })
-
+        if (category.value == `Computer`)
+            showQuiz(compQuestions)
+        else if (category.value == `Geography`)
+            showQuiz(geogQuestions)
     }
 }
 
-quiz.addEventListener('click', showQuiz)
+let showQuiz = (category) => {
+    // event.preventDefault()
 
+    quizDiv.innerHTML = ""
+    result.innerHTML = ""
+    let i = 0
+    for (var k = 0; k < category.length; k++) {
+        var a = category[Math.floor(Math.random() * category.length)];
+        var div = document.createElement('div')
+        div.className = `p-2 m-3 text-center bg-danger rounded-pill`
+        div.style.opacity = `0.9`
+        var p = document.createElement('p')
+        p.textContent = a.question
+        div.append(p)
+        for (key in a.answers) {
+            var label = document.createElement('label')
+            label.textContent = `${key}  :  ${a.answers[key]}   `
+            label.className = `pr-4`
+            var input = document.createElement('input')
+            input.type = "radio"
+            input.name = "quesion" + i
+            // input.setAttribute("class", "q   ues" + i)
+            input.className = `pr-1 ques${i}`
+            input.value = a.correctAnswer
+            div.append(input, label)
+        }
+        quizDiv.append(div)
+        i++
+    }
+    submit.style.display = `block`
+    submit.addEventListener('click', function () {
+        showResult(category)
+    })
 
-let showResult = ()=>{
+}
+
+quiz.addEventListener('click', startQuiz)
+
+function showResult(category) {
+    result.innerHTML = ""
     let count = 0;
     let i = 0
     let correctans = ""
-    compQuestions.map((a) => {
+    category.map((a) => {
         var ques = document.querySelectorAll('.ques' + i)
         for (var j = 0; j < 3; j++) {
             if (ques[j].checked) {
@@ -111,11 +170,9 @@ let showResult = ()=>{
         }
         i++
     })
-    result.textContent = `${count}   out of   ${compQuestions.length} answers are correct.
-    correct answers are  := ${correctans}`
+    result.textContent = `${count}   out of   ${category.length} answers are correct.
+                          correct answers are  := ${correctans}`
 }
-
-submit.addEventListener('click', showResult)
 
 
 
