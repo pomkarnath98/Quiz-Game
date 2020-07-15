@@ -93,7 +93,6 @@ let showQuiz = () => {
 
 quiz.addEventListener('click', showQuiz)
 
-submit.addEventListener('click', showResult)
 
 let showResult = ()=>{
     let count = 0;
@@ -113,9 +112,10 @@ let showResult = ()=>{
         i++
     })
     result.textContent = `${count}   out of   ${compQuestions.length} answers are correct.
-                          correct answers are  := ${correctans}`
+    correct answers are  := ${correctans}`
 }
 
+submit.addEventListener('click', showResult)
 
 
 
