@@ -46,38 +46,56 @@ const compQuestions = [
     }
 ];
 
+let name = document.getElementById('name')
 let quiz = document.getElementById('quiz')
 let submit = document.getElementById('submit')
 let result = document.getElementById('result')
+let category = document.getElementById('category')
+let quizDiv = document.getElementById('quizContentDiv')
 
 window.addEventListener('load', showQuiz)
 
-function showQuiz() {
-    event.preventDefault()
-    let i = 0
-    compQuestions.map((a) => {
-        let div = document.createElement('div')
-        let p = document.createElement('p')
-        p.textContent = a.question
-        div.append(p)
-        for (key in a.answers) {
-            let label = document.createElement('label')
-            label.textContent = `${key}  :  ${a.answers[key]}   `
-            let input = document.createElement('input')
-            input.type = "radio"
-            input.name = "quesion" + i
-            input.setAttribute("class", "ques" + i)
-            input.value = key
-            div.append(input, label)
-        }
-        quiz.append(div)
-        i++
-    })
+let showQuiz = () => {
+    // event.preventDefault()
+
+    quizDiv.innerHTML = ""
+
+    if(name.value == '')
+        alert(`Don't hide your name :)`)
+    else if (category.value == `Select Category`)
+        alert(`Oops.. You have to select a category!`)
+    else{
+
+        compQuestions.map((a) => {
+            var div = document.createElement('div')
+            div.className = `p-2 m-3 text-center bg-danger rounded-pill`
+            var p = document.createElement('p')
+            p.textContent = a.question
+            div.append(p)
+            for (key in a.answers) {
+                var label = document.createElement('label')
+                label.textContent = `${key}  :  ${a.answers[key]}   `
+                label.className = `pr-4`
+                var input = document.createElement('input')
+                input.type = "radio"
+                input.name = "quesion" + i
+                input.setAttribute("class", "ques" + i)
+                input.className = `pr-1`
+                input.value = a.correctAnswer
+                div.append(input, label)
+            }
+            quizDiv.append(div)
+            i++
+        })
+
+    }
 }
+
+quiz.addEventListener('click', showQuiz)
 
 submit.addEventListener('click', showResult)
 
-function showResult() {
+let showResult = ()=>{
     let count = 0;
     let i = 0
     let correctans = ""

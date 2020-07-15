@@ -46,33 +46,59 @@ var compQuestions = [
     }
 ];
 
-var quiz = document.getElementById('quiz')
-var submit = document.getElementById('submit')
-var result = document.getElementById('result')
+let name = document.getElementById('name')
+let quiz = document.getElementById('quiz')
+let submit = document.getElementById('submit')
+let result = document.getElementById('result')
+let category = document.getElementById('category')
+let quizDiv = document.getElementById('quizContentDiv')
 
-window.addEventListener('load', showQuiz)
+let showQuiz = () => {
+    // event.preventDefault()
+    // console.log(category.value)
+    quizDiv.innerHTML = ""
 
-function showQuiz() {
-    event.preventDefault()
-    compQuestions.map((a) => {
-        var div = document.createElement('div')
-        var p = document.createElement('p')
-        p.textContent = a.question
-        div.append(p)
-        for (key in a.answers) {
-            var label = document.createElement('label')
-            label.textContent = `${key}  :  ${a.answers[key]}   `
-            var input = document.createElement('input')
-            input.type = "radio"
-            input.name = "question"
-            input.value = a.correctAnswer
-            div.append(input, label)
-        }
-        quiz.append(div)
-    })
+    if(name.value == '')
+        alert(`Don't hide your name :)`)
+    else if (category.value == `Select Category`)
+        alert(`Oops.. You have to select a category!`)
+    else{
+
+        compQuestions.map((a) => {
+            var div = document.createElement('div')
+            div.className = `p-2 m-3 text-center bg-danger rounded-pill`
+            var p = document.createElement('p')
+            p.textContent = a.question
+            div.append(p)
+            for (key in a.answers) {
+                var label = document.createElement('label')
+                label.textContent = `${key}  :  ${a.answers[key]}   `
+                label.className = `pr-4`
+                var input = document.createElement('input')
+                input.type = "radio"
+                input.name = "quesion" + i
+                input.setAttribute("class", "ques" + i)
+                input.className = `pr-1`
+                input.value = a.correctAnswer
+                div.append(input, label)
+            }
+            quizDiv.append(div)
+            i++
+        })
+
+    }
 }
 
+quiz.addEventListener('click', showQuiz)
 
+// document.querySelector('#quiz').addEventListener('click',()=>{
+//     // document.getElementById('name').style.display = none;
+//     // document.getElementById('age').style.display = block;
+//     if (category.textContent == `Select Category`)
+//         alert(`Oops.. You have to select a category!`)
+//     else
+//         alert(1)
+// })
 
 
 
