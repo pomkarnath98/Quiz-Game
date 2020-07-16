@@ -1,4 +1,4 @@
-const compQuestions = [
+let compQuestions = [
     {
         question: "Which of these is the name for the failed key escrow device introduced by the National Security Agency in 1993 ? ",
         answers: {
@@ -50,7 +50,7 @@ const compQuestions = [
         displayed: false
     }
 ];
-const geogQuestions = [
+let geogQuestions = [
     {
         question: "Polavaram Project is located in which state?",
         answers: {
@@ -103,8 +103,25 @@ const geogQuestions = [
     }
 ];
 
-localStorage.setItem("comp", JSON.stringify(compQuestions))
-localStorage.setItem("geog", JSON.stringify(geogQuestions))
+
+let arr1 = localStorage.getItem("comp") || "Empty"
+if (arr1 === "Empty") {
+    localStorage.setItem("comp", JSON.stringify(compQuestions))
+}
+else if (arr1 !== "Empty") {
+    arr1 = JSON.parse(arr1)
+    compQuestions = arr1
+}
+let arr2 = localStorage.getItem("geog") || "Empty"
+if (arr2 === "Empty") {
+    localStorage.setItem("geog", JSON.stringify(geogQuestions))
+}
+else if (arr2 !== "Empty") {
+    arr2 = JSON.parse(arr2)
+    geogQuestions = arr2
+}
+console.log("comp geog", compQuestions, geogQuestions)
+
 
 let name = document.getElementById('name')
 let quiz = document.getElementById('quiz')
@@ -145,7 +162,9 @@ let showQuiz = (category) => {
     quizDiv.innerHTML = ""
     result.innerHTML = ""
     let i = 0
-    while (i < category.length) {
+    //only 5 questions will be displayed...
+    while (i < 5) {
+        console.log(category.length)
 
         let num = randNum(category.length)
         if (category[num].displayed != false)
