@@ -106,6 +106,8 @@ const geogQuestions = [
 let name = document.getElementById('name')
 let quiz = document.getElementById('quiz')
 let submit = document.getElementById('submit')
+let calculation = document.getElementById('calculation')
+let checkScore = document.getElementById(`checkScore`)
 let result = document.getElementById('result')
 let category = document.getElementById('category')
 let quizDiv = document.getElementById('quizContentDiv')
@@ -128,11 +130,13 @@ let randNum = (length) =>{
     
     let generateNum = Math.floor(Math.random() * length)
     return generateNum
-
+    
 }
 
 let showQuiz = (category) => {
     // event.preventDefault()
+    checkScore.style.display = `none`
+    calculation.style.display = `none`
     for(let val = 0; val < category.length; val++){
         // console.log(val)
         // console.log(category[val])
@@ -142,7 +146,7 @@ let showQuiz = (category) => {
     quizDiv.innerHTML = ""
     result.innerHTML = ""
     let i = 0
-    while (i < category.length) {
+    while (i < 5) {
 
         let num = randNum(category.length)
         if(category[num].displayed != false)
@@ -174,10 +178,20 @@ let showQuiz = (category) => {
     }
     submit.style.display = `block`
     submit.addEventListener('click', function () {
+        submit.style.display = `none`
+        calculation.style.display = `block`
+        setTimeout(afterCalculation,2000)
+    })
+    checkScore.addEventListener('click',()=>{
         showResult(category)
     })
-
 }
+
+let afterCalculation = ()=>{
+    calculation.style.display = `none`
+    checkScore.style.display = `block`
+}
+
 
 quiz.addEventListener('click', startQuiz)
 
@@ -193,22 +207,32 @@ function showResult(category) {
                 correctans = `${correctans}   ${a.correctAnswer}`
                 // console.log(correctans)
                 if (ques[j].value == a.correctAnswer) {
-                    console.log(ques[j].value, a.correctAnswer)
+                    // console.log(ques[j].value, a.correctAnswer)
                     count++
                 }
                 else {
-                    console.log(ques[j].value, a.correctAnswer)
+                    // console.log(ques[j].value, a.correctAnswer)
                     break
                 }
             }
         }
         i++
     })
-    result.textContent = `${count}   out of   ${category.length} answers are correct.
-                          correct answers are  := ${correctans}`
+
+    let percentage = (count/5)*100;
+
+    alert(`Hey ${name.value}! You Scored ${percentage}%`)
+    
+
+// result.textContent = `${count}   out of   ${category.length} answers are correct.
+//                           correct answers are  := ${correctans}`
 }
 
+// document.getElementById(`showResBtn`).addEventListener('click',()=>{
+    
+//     document.querySelector(`.modal-body`).textContent = `Done`
 
+// })
 
 
 

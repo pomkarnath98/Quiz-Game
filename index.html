@@ -10,30 +10,34 @@
 <body class="bg-dark text-white">
     <h1 class="text-left bg-dark p-2">Quiz World</h1>
 
-    <div class="container-fluid">
+    <div class="container-fluid">     
+            
+        <input placeholder="Enter your Name" size="50" class="p-2 bg-transparent text-white rounded-pill text-center" width="500px" type="text" name="name" id="name">
 
-        <div id="test">
+        <select class="p-2 bg-transparent text-white rounded-pill m-auto text-center" width="500px" name="category" id="category">
 
-            <input placeholder="Enter your Name" size="50" class="p-2 bg-transparent text-white rounded-pill text-center" width="500px" type="text" name="name" id="name">
-    
-            <select class="p-2 bg-transparent text-white rounded-pill m-auto text-center" width="500px" name="category" id="category">
-    
-                <option class="text-dark text-center" value="Select Category">Select Category</option>
-                <option class="text-dark" value="Computer">Computer</option>
-                <option class="text-dark" value="Geography">Geography</option>
-    
-            </select>
+            <option class="text-dark text-center" value="Select Category">Select Category</option>
+            <option class="text-dark" value="Computer">Computer</option>
+            <option class="text-dark" value="Geography">Geography</option>
 
-            <button id="quiz" class="next btn round border border-secondary">&#8250;</button>
-            <!-- <input placeholder="Age" size="50" class="p-2 bg-transparent text-white rounded-pill m-auto text-center" width="500px" type="number" name="age" id="age"> -->
-    
-            <!-- <div class="p-2 border border-danger">Enter your Name:</div> -->
-    
-            <div id="quizContentDiv"></div>
-            <button class="btn rounded-pill btn-outline-success m-auto" id="submit">SUBMIT</button>
-            <div id="result"></div>
+        </select>
 
-        </div>
+        <button id="quiz" class="next btn round border border-danger">&#8250;</button>
+        <!-- <input placeholder="Age" size="50" class="p-2 bg-transparent text-white rounded-pill m-auto text-center" width="500px" type="number" name="age" id="age"> -->
+
+        <!-- <div class="p-2 border border-danger">Enter your Name:</div> -->
+        
+        <div id="quizContentDiv"></div>
+        <button class="btn rounded-pill btn-success m-auto" id="submit">SUBMIT</button>
+        <button class="btn rounded-pill btn-success m-auto" id="checkScore">Check Your Score</button>
+
+        <button id="calculation" class="btn rounded-pill btn-success m-auto" type="button">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Calculating...
+        </button>
+
+        <div id="result"></div>
+
 
     </div>
 
