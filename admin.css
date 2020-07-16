@@ -1,0 +1,30 @@
+.container-fluid{
+    position: absolute;
+    top: 60px;
+    height: 800px;
+    /* opacity: 0.4; */
+    background-image: url('Resources/olav-ahrens-rotne-MAEbdaFe4ps-unsplash.jpg');
+    /* background-color: rgba(0, 0, 0, 0.7); */
+    
+    /* background-blend-mode: darken; */
+    /* backdrop-filter: blur(100000px); */
+
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+form{
+    opacity: 0.9;
+}
+#admin{
+    position: fixed;
+    top: 80px;
+    right: 5px;
+    z-index: 1;
+}
+h1{
+    height: 80px;
+    width:100%;
+    position: fixed;
+    z-index: 1;
+}
