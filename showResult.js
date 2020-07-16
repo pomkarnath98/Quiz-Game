@@ -1,4 +1,4 @@
-const compQuestions = [
+let compQuestions = [
     {
         question: "Which of these is the name for the failed key escrow device introduced by the National Security Agency in 1993 ? ",
         answers: {
@@ -50,7 +50,7 @@ const compQuestions = [
         displayed: false
     }
 ];
-const geogQuestions = [
+let geogQuestions = [
     {
         question: "Polavaram Project is located in which state?",
         answers: {
@@ -103,8 +103,25 @@ const geogQuestions = [
     }
 ];
 
-localStorage.setItem("comp", JSON.stringify(compQuestions))
-localStorage.setItem("geog", JSON.stringify(geogQuestions))
+
+let arr1 = localStorage.getItem("comp") || "Empty"
+if (arr1 === "Empty") {
+    localStorage.setItem("comp", JSON.stringify(compQuestions))
+}
+else if (arr1 !== "Empty") {
+    arr1 = JSON.parse(arr1)
+    compQuestions = arr1
+}
+let arr2 = localStorage.getItem("geog") || "Empty"
+if (arr2 === "Empty") {
+    localStorage.setItem("geog", JSON.stringify(geogQuestions))
+}
+else if (arr2 !== "Empty") {
+    arr2 = JSON.parse(arr2)
+    geogQuestions = arr2
+}
+console.log("comp geog", compQuestions, geogQuestions)
+
 
 let name = document.getElementById('name')
 let quiz = document.getElementById('quiz')
@@ -133,14 +150,14 @@ let randNum = (length) => {
 
     let generateNum = Math.floor(Math.random() * length)
     return generateNum
-    
+
 }
 
 let showQuiz = (category) => {
     // event.preventDefault()
     checkScore.style.display = `none`
     calculation.style.display = `none`
-    for(let val = 0; val < category.length; val++){
+    for (let val = 0; val < category.length; val++) {
         // console.log(val)
         // console.log(category[val])
         category[val].displayed = false
@@ -149,8 +166,9 @@ let showQuiz = (category) => {
     quizDiv.innerHTML = ""
     result.innerHTML = ""
     let i = 0
-    while (i < 5) {
 
+    //only 5 questions will be displayed...
+    while (i < 5) {
         let num = randNum(category.length)
         if (category[num].displayed != false)
             continue
@@ -184,14 +202,14 @@ let showQuiz = (category) => {
     submit.addEventListener('click', function () {
         submit.style.display = `none`
         calculation.style.display = `block`
-        setTimeout(afterCalculation,2000)
+        setTimeout(afterCalculation, 2000)
     })
-    checkScore.addEventListener('click',()=>{
+    checkScore.addEventListener('click', () => {
         showResult(category)
     })
 }
 
-let afterCalculation = ()=>{
+let afterCalculation = () => {
     calculation.style.display = `none`
     checkScore.style.display = `block`
 
@@ -225,17 +243,17 @@ function showResult(category) {
         i++
     })
 
-    let percentage = (count/5)*100;
+    let percentage = (count / 5) * 100;
 
     alert(`Hey ${name.value}! You Scored ${percentage}%`)
-    
 
-// result.textContent = `${count}   out of   ${category.length} answers are correct.
-//                           correct answers are  := ${correctans}`
+
+    // result.textContent = `${count}   out of   ${category.length} answers are correct.
+    //                           correct answers are  := ${correctans}`
 }
 
 // document.getElementById(`showResBtn`).addEventListener('click',()=>{
-    
+
 //     document.querySelector(`.modal-body`).textContent = `Done`
 
 // })
