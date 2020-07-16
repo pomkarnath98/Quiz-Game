@@ -44,7 +44,7 @@ const compQuestions = [
         answers: {
             a: "Multipurpose Interleave Mail Exchange",
             b: "Mail Interleave Method Exchange",
-            c: "Multipurpose Internet Mail Extensions"
+            c: "Multipurpose Internet Mail Extensions",
         },
         correctAnswer: 'c',
         displayed: false
@@ -103,6 +103,9 @@ const geogQuestions = [
     }
 ];
 
+localStorage.setItem("comp", JSON.stringify(compQuestions))
+localStorage.setItem("geog", JSON.stringify(geogQuestions))
+
 let name = document.getElementById('name')
 let quiz = document.getElementById('quiz')
 let submit = document.getElementById('submit')
@@ -112,13 +115,13 @@ let result = document.getElementById('result')
 let category = document.getElementById('category')
 let quizDiv = document.getElementById('quizContentDiv')
 
-let startQuiz = ()=>{
+let startQuiz = () => {
 
-    if(name.value == '')
+    if (name.value == '')
         alert(`Don't hide your name :)`)
     else if (category.value == `Select Category`)
         alert(`Oops.. You have to select a category!`)
-    else{
+    else {
         if (category.value == `Computer`)
             showQuiz(compQuestions)
         else if (category.value == `Geography`)
@@ -126,8 +129,8 @@ let startQuiz = ()=>{
     }
 }
 
-let randNum = (length) =>{
-    
+let randNum = (length) => {
+
     let generateNum = Math.floor(Math.random() * length)
     return generateNum
     
@@ -142,16 +145,16 @@ let showQuiz = (category) => {
         // console.log(category[val])
         category[val].displayed = false
     }
-    
+
     quizDiv.innerHTML = ""
     result.innerHTML = ""
     let i = 0
     while (i < 5) {
 
         let num = randNum(category.length)
-        if(category[num].displayed != false)
+        if (category[num].displayed != false)
             continue
-        else{
+        else {
             category[num].displayed = true
             // console.log(num)
             var a = category[num];
@@ -168,8 +171,9 @@ let showQuiz = (category) => {
                 var input = document.createElement('input')
                 input.type = "radio"
                 input.name = "quesion" + i
-                input.className = `pr-1 ques${i}`
-                input.value = a.correctAnswer
+                input.classList.add("pr-1", "ques" + i)
+                // input.className = `pr-1 ques${i}`
+                input.value = key
                 div.append(input, label)
             }
             quizDiv.append(div)
@@ -190,6 +194,7 @@ let showQuiz = (category) => {
 let afterCalculation = ()=>{
     calculation.style.display = `none`
     checkScore.style.display = `block`
+
 }
 
 
@@ -200,12 +205,13 @@ function showResult(category) {
     let count = 0;
     let i = 0
     let correctans = ""
+    console.log("quiz", category, quizDiv)
     category.map((a) => {
-        var ques = document.querySelectorAll('.ques' + i)
-        for (var j = 0; j < 3; j++) {
+        let ques = document.querySelectorAll('.ques' + i)
+        for (let j = 0; j < 3; j++) {
             if (ques[j].checked) {
                 correctans = `${correctans}   ${a.correctAnswer}`
-                // console.log(correctans)
+                console.log("entered", ques[j].value, a.correctAnswer)
                 if (ques[j].value == a.correctAnswer) {
                     // console.log(ques[j].value, a.correctAnswer)
                     count++
@@ -233,6 +239,5 @@ function showResult(category) {
 //     document.querySelector(`.modal-body`).textContent = `Done`
 
 // })
-
 
 
