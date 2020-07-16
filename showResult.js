@@ -103,6 +103,9 @@ const geogQuestions = [
     }
 ];
 
+localStorage.setItem("comp", JSON.stringify(compQuestions))
+localStorage.setItem("geog", JSON.stringify(geogQuestions))
+
 let name = document.getElementById('name')
 let quiz = document.getElementById('quiz')
 let submit = document.getElementById('submit')
@@ -174,10 +177,7 @@ let showQuiz = (category) => {
         }
     }
     submit.style.display = `block`
-    submit.addEventListener('click', function () {
-        showResult(category)
-    })
-
+    submit.addEventListener('click', () => showResult(category))
 }
 
 quiz.addEventListener('click', startQuiz)
@@ -189,13 +189,12 @@ function showResult(category) {
     let correctans = ""
     console.log("quiz", category, quizDiv)
     category.map((a) => {
-        var ques = document.querySelectorAll('.ques' + i)
-        for (var j = 0; j < 3; j++) {
+        let ques = document.querySelectorAll('.ques' + i)
+        for (let j = 0; j < 3; j++) {
             if (ques[j].checked) {
                 correctans = `${correctans}   ${a.correctAnswer}`
                 console.log("entered", ques[j].value, a.correctAnswer)
                 if (ques[j].value == a.correctAnswer) {
-
                     count++
                 }
                 else {
